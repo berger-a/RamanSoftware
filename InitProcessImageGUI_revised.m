@@ -197,13 +197,13 @@ xpixeldrift = 6;
 ypixeldrift = 2;
 
 % Throughput Properties
-fibernum = 20; % Number of fibers to use in fit
+fibernum = 20; % Number of fibers to use in fit - using smaller amount due to only 6 mm (?)
 thpeakstripwindow = 3;
 thedgedist = 4;
 
 % Neon Properties
 npeakstripwindow = 4;
-npeaknum = 22;
+npeaknum = 22;  % this value has to match the length of npeaklambda
 npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.06 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
 
 polyorderneon = 3;
