@@ -197,7 +197,7 @@ xpixeldrift = 6;
 ypixeldrift = 2;
 
 % Throughput Properties
-fibernum = 40; % Number of fibers to use in fit
+fibernum = 20; % Number of fibers to use in fit
 thpeakstripwindow = 3;
 thedgedist = 4;
 
