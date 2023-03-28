@@ -203,8 +203,9 @@ thedgedist = 4;
 
 % Neon Properties
 npeakstripwindow = 4;
-npeaknum = 22;  % this value has to match the length of npeaklambda
-npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.06 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
+npeaknum = 19;  % this value has to match the length of npeaklambda
+%npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.06 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
+npeaklambda = [849.54 859.13  865.44  878.06 885.39 886.55 891.95 914.87 920.18  930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
 
 polyorderneon = 3;
 
