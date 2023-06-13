@@ -197,14 +197,22 @@ xpixeldrift = 6;
 ypixeldrift = 2;
 
 % Throughput Properties
-fibernum = 40; % Number of fibers to use in fit
+
+% old values of fibernum include 40 - ajb
+fibernum = 20; % Number of fibers to use in fit - using smaller amount due to only 6 mm (?)
+              % I guess I was worried that we wouldn't capture data from
+              % all fibers for distortion correction -- but that is wrong, 
+              % because neon certainly fills all fibers, and I think
+              % Tylenol does as well.  So perhaps this should be lifted.
+              
 thpeakstripwindow = 3;
 thedgedist = 4;
 
 % Neon Properties
 npeakstripwindow = 4;
-npeaknum = 22;
-npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.06 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
+npeaknum = 19;  % this value has to match the length of npeaklambda
+%npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.06 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
+npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.0 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 942.54 953.42 954.74 966.54].';
 
 polyorderneon = 3;
 
@@ -227,7 +235,14 @@ list = allfiles(specind);
 
 %% Load Dark Spectrum
 set(handles.initprocessstatus,'string','Status: Calculating Dark Spectrum...'); pause(1E-6)
-darkspec = load([filedir '/darkspec_cali.mat']);
+
+% Once upon a time we used a separate darkspec file for this, but for a
+% long time we have been using the same single file 'darkspec.mat' and just
+% copying that .mat file into darkspec_cali.mat.  So in this change we are
+% going to get rid of the latter.  - ajb 2023.06.13
+% darkspec = load([filedir '/darkspec_cali.mat']);
+darkspec = load([filedir '/darkspec.mat']);
+
 darkspec = squeeze(double(permute(reshape(darkspec.RawData.Spectrum.',px,py, ...
     str2double(darkspec.RawData.NumofKin)),[3 2 1])./...
     str2double(darkspec.RawData.NumofAcu)));

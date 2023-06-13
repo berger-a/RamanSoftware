@@ -197,14 +197,20 @@ xpixeldrift = 6;
 ypixeldrift = 2;
 
 % Throughput Properties
-fibernum = 40; % Number of fibers to use in fit
+fibernum = 20; % Number of fibers to use in fit - using smaller amount due to only 6 mm (?)
+              % I guess I was worried that we wouldn't capture data from
+              % all fibers for distortion correction -- but that is wrong, 
+              % because neon certainly fills all fibers, and I think
+              % Tylenol does as well.  So perhaps this should be lifted.
+              
 thpeakstripwindow = 3;
 thedgedist = 4;
 
 % Neon Properties
 npeakstripwindow = 4;
-npeaknum = 22;
-npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.06 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
+npeaknum = 19;  % this value has to match the length of npeaklambda
+%npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.06 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 NaN 942.54 NaN NaN 953.42 954.74 966.54].';
+npeaklambda = [849.54 859.13 NaN 865.44 NaN 878.0 885.39 886.55 891.95 914.87 920.18 NaN 930.09 NaN 932.65 942.54 953.42 954.74 966.54].';
 
 polyorderneon = 3;
 
@@ -281,8 +287,8 @@ while(sum((npeaklambdaold==npeaklambda) + floor((isnan(npeaklambdaold)+isnan(npe
     ylabel('intensity / a.u.'); xlabel('pixel number');
     
     axes(handles.previousstep); cla;
-    % for future: maybe have an 
-    figure_handle = openfig('C:\Users\cmass\Documents\GradSchool\Lab Stuff\throughput_10192018\neon.fig'); % figure is opened
+    % for future: make a better way to have this work cross-platform
+    figure_handle = openfig('neon.fig'); % figure is opened
     axes_handle = findobj(figure_handle, 'Type', 'Axes'); % find handle to axes in figure
     axes_children_handle = get(axes_handle, 'Children');
     copyobj(axes_children_handle, handles.previousstep); % children of original axes are copied to new axes
@@ -405,7 +411,8 @@ while(sum((typeakwavenumold==typeakwavenum) + floor((isnan(typeakwavenumold)+isn
     ylabel('intensity / a.u.'); xlabel('wavelength / nm');
     
     axes(handles.previousstep); cla;
-    figure_handle = openfig('C:\Users\cmass\Documents\GradSchool\Lab Stuff\throughput_10192018\tylenol.fig'); % figure is opened
+    % flag to fix this also
+    figure_handle = openfig('tylenol.fig'); % figure is opened
     axes_handle = findobj(figure_handle, 'Type', 'Axes'); % find handle to axes in figure
     axes_children_handle = get(axes_handle, 'Children');
     copyobj(axes_children_handle, handles.previousstep); % children of original axes are copied to new axes
