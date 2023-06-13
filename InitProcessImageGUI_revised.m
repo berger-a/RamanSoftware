@@ -197,7 +197,14 @@ xpixeldrift = 6;
 ypixeldrift = 2;
 
 % Throughput Properties
+
+% old values of fibernum include 40 - ajb
 fibernum = 20; % Number of fibers to use in fit - using smaller amount due to only 6 mm (?)
+              % I guess I was worried that we wouldn't capture data from
+              % all fibers for distortion correction -- but that is wrong, 
+              % because neon certainly fills all fibers, and I think
+              % Tylenol does as well.  So perhaps this should be lifted.
+              
 thpeakstripwindow = 3;
 thedgedist = 4;
 
@@ -228,7 +235,14 @@ list = allfiles(specind);
 
 %% Load Dark Spectrum
 set(handles.initprocessstatus,'string','Status: Calculating Dark Spectrum...'); pause(1E-6)
-darkspec = load([filedir '/darkspec_cali.mat']);
+
+% Once upon a time we used a separate darkspec file for this, but for a
+% long time we have been using the same single file 'darkspec.mat' and just
+% copying that .mat file into darkspec_cali.mat.  So in this change we are
+% going to get rid of the latter.  - ajb 2023.06.13
+% darkspec = load([filedir '/darkspec_cali.mat']);
+darkspec = load([filedir '/darkspec.mat']);
+
 darkspec = squeeze(double(permute(reshape(darkspec.RawData.Spectrum.',px,py, ...
     str2double(darkspec.RawData.NumofKin)),[3 2 1])./...
     str2double(darkspec.RawData.NumofAcu)));
